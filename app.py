@@ -21,7 +21,23 @@ app.config.suppress_callback_exceptions = True
 
 # Load data from csv
 def load_data():
-    # To do: Completar la función 
+    # To do: Completar la función
+    # 1. Cargar el archivo CSV como DataFrame
+    data = pd.read_csv("datos_energia.csv")
+    
+    # 2. Identificar el nombre de la columna que contiene las fechas 
+    # (Asumimos que es la primera columna. Si tiene un nombre específico, puedes cambiar `col_fecha` por el nombre entre comillas, ej: 'fecha')
+    col_fecha = data.columns[0] 
+    
+    # 3. Convertir la columna de fecha a formato datetime
+    data[col_fecha] = pd.to_datetime(data[col_fecha])
+    
+    # 4. Establecer esa columna como el índice del DataFrame
+    data = data.set_index(col_fecha)
+    
+    # 5. Retornar el DataFrame
+    return data
+    
     
 
 # Cargar datos
